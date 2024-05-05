@@ -1,0 +1,46 @@
+$font-family-1: "Poppins", sans-serif;
+$font-family-2: "Lexend Giga", sans-serif;
+
+body {
+    font-family: $font-family-1;
+}
+
+.header {
+    height: 100vh;
+    background: url("../images/hero-images/science-fiction_4.jpg") no-repeat
+        center center/cover;
+}
+
+.navbar {
+    padding: 1rem;
+    opacity: 0.95;
+    animation: onload 4s ease-in-out;
+}
+
+.header-text {
+    font-family: $font-family-2;
+}
+
+#carousel {
+    font-family: $font-family-2;
+}
+
+#carousel-left-button,
+#carousel-right-button {
+    opacity: 0.5;
+    background-color: transparent;
+}
+#carousel-left-button:hover,
+#carousel-right-button:hover {
+    opacity: 0.8;
+    scale: 1.15;
+}
+
+@keyframes onload {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

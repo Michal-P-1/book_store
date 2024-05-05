@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./css/fontawesome.css" />
+        <link rel="stylesheet" href="./css/bootstrap.css" />
+        <link rel="stylesheet" href="./css/styles.css" />
+        <script src="./js/bootstrap.bundle.min.js" defer></script>
+        <script src="./js/headerScript.js" defer></script>
+        <script type="text/javascript" src="./js/booksScript.js"></script>
+        <title>Bootstrap 5 Starter</title>
+    </head>
+    <body id="body">
+        <header class="header vh-100">
+            <!-- Navigation -->
+            <nav
+                id="navbar"
+                class="navbar navbar-expand-lg fixed-top navbar-white bg-primary"
+            >
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <i class="fa-solid fa-book-open"></i>
+                        Myky's bookstore</a
+                    >
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div
+                        class="collapse navbar-collapse"
+                        id="navbarNavDropdown"
+                    >
+                        <ul class="navbar-nav ms-auto align-items-center">
+                            <li class="nav-item">
+                                <a href="#details" class="nav-link fw-semibold"
+                                    >About</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="contact.html"
+                                    class="nav-link fw-semibold btn btn-outline-light px-4 mx-4"
+                                    >Contact</a
+                                >
+                            </li>
+                        </ul>
+                        <form class="d-flex align-items-center">
+                            <input
+                                class="form-control search-input me-2 h-75"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                            />
+                            <button
+                                class="btn btn-secondary search-btn"
+                                type="submit"
+                            >
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+            <div
+                class="d-flex align-items-center h-100 w-100 justify-content-center"
+            >
+                <h1
+                    class="header-text text-white text-center display-1 fw-lighter shadow-lg w-100"
+                >
+                    Adventures await you
+                </h1>
+            </div>
+
+            <!-- Carousel -->
+            <div
+                id="carousel"
+                class="position-absolute top-80 text-white w-100 shadow"
+            >
+                <div
+                    class="container d-flex justify-content-between align-items-center"
+                >
+                    <button
+                        id="carousel-left-button"
+                        class="border-0 text-white"
+                    >
+                        <i class="fa-solid fa-chevron-left fa-4x"></i>
+                    </button>
+
+                    <p
+                        data-color-theme=""
+                        class="m-0 fs-1 opacity-75 fw-lighter text-center"
+                    ></p>
+                    <button
+                        id="carousel-right-button"
+                        class="bg-transparent border-0"
+                    >
+                        <i
+                            class="fa-solid fa-chevron-right fa-4x text-white"
+                        ></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="recommendation bg-primary pt-4 pt-md-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="text-secondary text-center">
+                                Our recommendation
+                            </h2>
+                        </div>
+                        <div
+                            data-recommended-books
+                            class="d-flex gap-5 flex-wrap justify-content-evenly"
+                        >
+                            <div class="card shadow-lg">
+                                <div
+                                    class="card-body d-flex flex-md-column align-items-center justify-content-center text-center"
+                                >
+                                    <img
+                                        src="..."
+                                        class="card-img-top"
+                                        alt="..."
+                                        data-book-img
+                                    />
+                                    <div class="card-body">
+                                        <h5 data-book-title class="card-title">
+                                            Card title
+                                        </h5>
+                                        <p data-book-author class="card-text">
+                                            Author
+                                        </p>
+                                        <p
+                                            class="badge bg-secondary"
+                                            data-book-category
+                                            class="badge bg-secondary"
+                                        ></p>
+                                        <p
+                                            data-book-published-date
+                                            class="card-text"
+                                        >
+                                            Published date
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="card">
+                                <div class="card-body">
+                                    <img
+                                        src="..."
+                                        class="card-img-top"
+                                        alt="..."
+                                    />
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">
+                                            Some quick example text to build on
+                                            the card title and make up the bulk
+                                            of the card's content.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <!-- CARD 2 -->
+                        <div class=""></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <template id="recommended-books-card-template">
+            <div class="card shadow-lg">
+                <div
+                    class="card-body d-flex flex-md-column align-items-center justify-content-center text-center"
+                >
+                    <img
+                        src="..."
+                        class="card-img-top"
+                        alt="..."
+                        data-book-img
+                    />
+                    <div
+                        class="card-body d-flex flex-column justify-content-between"
+                    >
+                        <h5 data-book-title class="card-title">Card title</h5>
+                        <p data-book-author class="card-text">Author</p>
+                        <p
+                            class="badge bg-secondary"
+                            data-book-category
+                            class="badge bg-secondary"
+                        ></p>
+                        <p data-book-price class="card-text">Published date</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+/* Overwrite default bootstrap */
+:root {
+    --primary-color: white;
+    --secondary-color: #001f3f;
+    --font-type-primary: "Lexend Giga", sans-serif;
+    --font-type-secondary: "Poppins", sans-serif;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+/* Own css classes */
+body {
+    font-family: var(--font-type-primary);
+}
+
+.header {
+    background: no-repeat center center/cover;
+}
+
+.navbar {
+    font-family: var(--font-type-secondary);
+    padding: 1rem;
+    opacity: 0.95;
+    animation: onload 4s ease-in-out;
+    transition: opacity 2s ease;
+}
+
+#carousel-left-button,
+#carousel-right-button {
+    opacity: 0.5;
+    background-color: transparent;
+}
+
+#carousel-left-button:hover,
+#carousel-right-button:hover {
+    opacity: 0.8;
+    scale: 1.15;
+}
+
+[data-color-theme] {
+    transition: opacity 2s ease;
+}
+
+.changing {
+    opacity: 0 !important;
+}
+
+/* BOOKS CARD */
+.card {
+    font-family: var(--font-type-secondary);
+    width: 16rem;
+}
+
+.card-img-top {
+    height: clamp(8rem, 1.6rem + 32vi, 12rem);
+    width: clamp(6rem, -0.4rem + 32vi, 10rem);
+}
+
+@keyframes onload {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .card {
+        width: 100%;
+    }
+}
