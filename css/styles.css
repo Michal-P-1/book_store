@@ -2,8 +2,16 @@
 :root {
     --primary-color: white;
     --secondary-color: #001f3f;
+    --primary-color-darker: color-mix(
+        in srgb,
+        var(--primary-color),
+        var(--secondary-color) 5%
+    );
     --font-type-primary: "Lexend Giga", sans-serif;
     --font-type-secondary: "Poppins", sans-serif;
+}
+.btn {
+    width: fit-content;
 }
 
 .bg-primary {
@@ -17,6 +25,18 @@
 .btn-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
+}
+
+.btn-secondary {
+    opacity: 0.8;
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+}
+
+.btn-secondary:hover {
+    opacity: 1;
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
 }
 
 .bg-secondary {
@@ -64,16 +84,89 @@ body {
     opacity: 0 !important;
 }
 
-/* BOOKS CARD */
-.card {
+/* || RECOMMENDED BOOKS CARD */
+.recommended-books-card {
     font-family: var(--font-type-secondary);
-    width: 16rem;
+    /* max-width: 35rem; */
+    min-width: 25rem;
+    height: 20rem;
 }
 
-.card-img-top {
-    height: clamp(8rem, 1.6rem + 32vi, 12rem);
-    width: clamp(6rem, -0.4rem + 32vi, 10rem);
+#carouselRecommendedBooks {
+    max-width: max(55rem, 80%);
 }
+
+.recommended-books-card .card-img-top {
+    width: 128px;
+    height: 196px;
+}
+
+.badge {
+    width: min-content;
+}
+
+.recommended-card-text-body {
+    width: 12rem;
+}
+
+[data-recommended-book-title] {
+    max-width: 12rem;
+}
+
+/* || SIDEBAR  */
+.sidebar {
+    font-family: var(--font-type-secondary);
+}
+
+.nav-link {
+    color: var(--primary-color-darker);
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.sidebar-container {
+    width: min(30vw, 18rem);
+    top: 4.6rem;
+}
+
+.sidebar-container-menu {
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.sidebar-genre-text {
+    width: 9rem;
+}
+
+.sidebar-genre-text-expanded {
+    display: inline-block !important;
+}
+
+/* || GENRE BOOKS CARD */
+.genre-books-card {
+    font-family: var(--font-type-secondary);
+    width: 15rem;
+    max-height: 550px;
+    overflow: scroll;
+
+    /* min-width: 25rem; */
+    /* height: 20rem;s */
+}
+
+.genre-books-card .card-img-top {
+    width: 80px;
+    height: 120px;
+}
+
+/* || ANIMATIONS */
 
 @keyframes onload {
     0% {
@@ -87,8 +180,44 @@ body {
     }
 }
 
+/* RESPONSIVE */
+
 @media (max-width: 767px) {
-    .card {
+    .recommended-books-card {
         width: 100%;
+        justify-content: center;
+    }
+
+    /* || RECOMMENDED BOOKS */
+
+    .recommended-card-text-body {
+        width: 8rem;
+    }
+
+    [data-recommended-book-title] {
+        max-width: 7rem;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: white;
+    }
+
+    /* || SIDEBAR  */
+    .sidebar-container {
+        width: min(22vw, 18rem);
+    }
+
+    .sidebar-expanded {
+        position: absolute;
+        width: 65vw !important;
+    }
+
+    .sidebar-title {
+        font-size: 1rem !important;
+    }
+
+    .genre-books-card {
+        width: 90%;
     }
 }

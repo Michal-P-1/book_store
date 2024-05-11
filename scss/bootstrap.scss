@@ -1,11 +1,7 @@
 // Buttons
-$primary: purple;
-// $button-padding-x: 10px;
 $button-padding-y: 4px;
-
-// $btn-padding-x: $button-padding-x;
-// $btn-padding-x-sm: $button-padding-x;
-// $btn-padding-x-lg: $button-padding-x;
+$primary: white;
+$secondary: blue;
 $btn-padding-y: $button-padding-y;
 $btn-padding-y-sm: $button-padding-y;
 $btn-padding-y-lg: $button-padding-y;
@@ -20,5 +16,12 @@ $position-values: (
     80: 80%,
     100: 100%,
 ) !default;
+
+//
+$offcanvas-horizontal-width: 100px;
+
+// Carousel
+$carousel-control-color: black;
+$carousel-indicator-active-bg: black;
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
