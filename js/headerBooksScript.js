@@ -4,6 +4,10 @@ const carouselLeftButton = document.querySelector("#carousel-left-button");
 const carouselRightButton = document.querySelector("#carousel-right-button");
 const header = document.querySelector("header");
 const navbar = document.querySelector("#navbar");
+const searchButton = document.querySelector(".search-btn");
+const cartButton = document.querySelector("#cart-button");
+const cartBadge = cartButton.querySelector("#cart-badge");
+const contactButton = document.querySelector("#contact-link");
 
 // COLURS FOR DIFFERENT GENRES
 const SCIENCE_FICTION_COLOURS = { primary: "#E6F2FF", secondary: "#001F3F" };
@@ -47,6 +51,7 @@ carouselLeftButton.addEventListener("click", () => {
 
     const currentShelfId = getRecommendedBooksShelfId();
     fetchRecommendedBooksData(currentShelfId);
+    resetPagination();
     fetchAllBooksData();
 });
 
@@ -65,6 +70,7 @@ carouselRightButton.addEventListener("click", () => {
     disableCarouselButtonsTime(CHANGE_THEME_TIME + 1000);
     const currentShelfId = getRecommendedBooksShelfId();
     fetchRecommendedBooksData(currentShelfId);
+    resetPagination();
     fetchAllBooksData();
 });
 
@@ -154,24 +160,27 @@ getColourTheme
     : setColourTheme("science-fiction", 0); // Default color theme
 
 // NAVBAR
-function userScroll() {
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            navbar.classList.remove("bg-primary", "navbar-white", "opacity-95");
-            navbar.classList.add("bg-secondary", "navbar-dark", "opacity-100");
-        } else {
-            navbar.classList.remove(
-                "bg-secondary",
-                "navbar-dark",
-                "opacity-100"
-            );
-            navbar.classList.add("bg-primary", "navbar-white", "opacity-95");
-        }
-    });
-}
 
-document.addEventListener("DOMContentLoaded", () => {
-    userScroll();
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        navbar.classList.remove("bg-primary", "navbar-white", "opacity-95");
+        navbar.classList.add("bg-secondary", "navbar-dark", "opacity-100");
+        searchButton.classList.remove("btn-secondary");
+        searchButton.classList.add("btn-primary");
+        // cartButton.classList.remove("btn-secondary");
+        // cartButton.classList.add("btn-primary");
+        // cartBadge.classList.remove("bg-primary", "text-secondary");
+        // cartBadge.classList.add("bg-secondary", "text-primary");
+    } else {
+        navbar.classList.remove("bg-secondary", "navbar-dark", "opacity-100");
+        navbar.classList.add("bg-primary", "navbar-white", "opacity-95");
+        searchButton.classList.remove("btn-primary");
+        searchButton.classList.add("btn-secondary");
+        // cartButton.classList.remove("btn-primary");
+        // cartButton.classList.add("btn-secondary");
+        // cartBadge.classList.remove("bg-secondary", "text-primary");
+        // cartBadge.classList.add("bg-primary", "text-secondary");
+    }
 });
 
 // --------- BOOKS LOGIC JS ------------
@@ -180,13 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const currentShelfId = getRecommendedBooksShelfId();
 fetchRecommendedBooksData(currentShelfId);
 
-// const bookCardImg = document.querySelector("[data-book-img]");
-// const bookCardTitle = document.querySelector("[data-book-title]");
-// const bookCardAuthor = document.querySelector("[data-book-author]");
-// const bookCardPublishedDate = document.querySelector(
-//     "[data-book-published-date]"
-// );
-// const bookCardCategory = document.querySelector("[data-book-category]");
 const recommendedBooksContainer = document.querySelector(
     "#recommended-books-inner-carousel"
 );
@@ -196,19 +198,29 @@ const recommendedBooksTemplate = document.querySelector(
 const expandSideBarBtn = document.querySelector("#expand-sidebar-btn");
 
 async function fetchRecommendedBooksData(shelfId) {
+    // Reset the container
+    // recommendedBooksContainer.innerHTML = "";
+    const spinner = document.querySelector(
+        ".recommended-spinner-border-container"
+    );
+    // Show spinner while fetching data
+    spinner.classList.remove("visually-hidden");
+
     const response = await fetch(
         `https://www.googleapis.com/books/v1/users/101352676981191392501/bookshelves/${shelfId}/volumes?maxResults=4`,
         { method: "GET" }
     );
 
     const recommendedBooks = await response.json();
+    // Hide spinner after fetching data
+    spinner.classList.add("visually-hidden");
 
     displayRecommendedBooks(recommendedBooks.items);
 }
 
 function displayRecommendedBooks(booksData) {
     let index = 0;
-    // Resert the container
+    // Reset the container
     recommendedBooksContainer.innerHTML = "";
 
     booksData.forEach((book) => {
@@ -270,8 +282,9 @@ function getRecommendedBooksShelfId() {
 }
 
 // || GENRES BOOKS "ALL BOOKS" JS ||
+const NUMBER_OF_BOOKS_PER_PAGE = 12;
 
-function updateGenresBooksTitle(searchQuery) {
+function updateGenresBooksTitleAndSidebar(searchQuery) {
     const genresBooksTitle = document.querySelector(".genres-books-title");
     let genreName = "";
 
@@ -287,35 +300,54 @@ function updateGenresBooksTitle(searchQuery) {
     }
 
     genresBooksTitle.textContent = genreName;
+    // Initial sidebar active button
+    if (genreName) {
+        // Check if there is an active sidebar button
+        const activeSidebarButton = document.querySelector(
+            ".sidebar-container-menu .active"
+        );
+        // If there is an active sidebar button, remove the active class
+        if (activeSidebarButton) {
+            activeSidebarButton.classList.remove("active");
+        }
+        // Add the active class to the sidebar button based on the initial genre
+        const initialActiveSidebarButton = document.querySelector(
+            `[data-genre='${genreName}']`
+        );
+        if (initialActiveSidebarButton) {
+            initialActiveSidebarButton.classList.add("active");
+        }
+    }
 }
 
-updateGenresBooksTitle();
-async function fetchAllBooksData(startIndexValue = 0) {
-    const searchCategory = "";
+const initialGenresBookTitleUpdate = updateGenresBooksTitleAndSidebar();
+
+async function fetchAllBooksData(startIndexValue = 0, searchCategory = "") {
     const searchQuery = searchCategory || currentColorTheme.dataset.colorTheme;
-    const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q={${searchQuery}}&startIndex=${startIndexValue}&maxResults=12&printType=books`,
-        { method: "GET" }
-    );
-    const allBooks = await response.json();
+    const spinner = document.querySelector(".genres-spinner-border-container");
+    const allBooksContainer = document.querySelector(".genre-books-container");
 
-    // Update the title of the genres books
-    updateGenresBooksTitle(searchQuery);
-    displayAllBooks(allBooks.items);
+    allBooksContainer.innerHTML = "";
 
-    // console.log(books);
-    // console.log(books.items[0].volumeInfo);
-    // console.log(books.items[0].volumeInfo.title);
-    // console.log(books.items[0].volumeInfo.authors);
-    // // console.log(books.items[0].saleInfo.listPrice.amount);
-    // console.log(books.items[0].volumeInfo.imageLinks.thumbnail);
+    try {
+        // Show spinner while fetching data
+        spinner.classList.remove("visually-hidden");
+        const response = await fetch(
+            `https://www.googleapis.com/books/v1/volumes?q={${searchQuery}}&startIndex=${startIndexValue}&maxResults=${NUMBER_OF_BOOKS_PER_PAGE}&printType=books`,
+            { method: "GET" }
+        );
 
-    // bookCardImg.src = books.items[0].volumeInfo.imageLinks.thumbnail;
-    // bookCardAuthor.textContent = books.items[0].volumeInfo.authors;
-    // bookCardTitle.textContent = books.items[0].volumeInfo.title;
-
-    // const price = books.items[0]?.saleInfo?.listPrice?.amount || "8.99";
-    // bookCardPublishedDate.textContent = price;
+        const allBooks = await response.json();
+        // Hide spinner after fetching data
+        spinner.classList.add("visually-hidden");
+        // Update the title of the genres books
+        updateGenresBooksTitleAndSidebar(searchQuery);
+        displayAllBooks(allBooks.items);
+        return allBooks;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+    }
 }
 
 function displayAllBooks(booksData) {
@@ -323,7 +355,7 @@ function displayAllBooks(booksData) {
     const allBooksTemplate = document.querySelector(
         "#genre-books-card-template"
     );
-    allBooksContainer.innerHTML = "";
+    // allBooksContainer.innerHTML = "";
 
     booksData.forEach((book) => {
         const allBookCardTemplateCopy =
@@ -340,21 +372,47 @@ function displayAllBooks(booksData) {
         const bookCardCategory = allBookCardTemplateCopy.querySelector(
             "[data-book-category]"
         );
+        const bookCardId = allBookCardTemplateCopy.querySelector(
+            "[data-genre-book-id]"
+        );
 
-        bookCardImg.src = book.volumeInfo.imageLinks.thumbnail;
+        // If the book has no image, set a default image
+        bookCardImg.src = book?.volumeInfo?.imageLinks?.thumbnail || "";
+        if (bookCardImg.src === "") {
+            bookCardImg.src = "../images/Icons/book_placeholder.png";
+        }
+
         bookCardTitle.textContent = book.volumeInfo.title;
         bookCardAuthor.textContent = book.volumeInfo.authors;
         bookCardCategory.textContent = book.volumeInfo.categories;
         const price = book.saleInfo?.listPrice?.amount || "8.99";
         bookCardPrice.textContent = `£${price}`;
+        bookCardId.dataset.genreBookId = book.id;
 
         allBooksContainer.appendChild(allBookCardTemplateCopy);
     });
 }
+// Initial fetch
+const initialFetch = fetchAllBooksData();
 
-fetchAllBooksData();
+// Seach button fetch data
+searchButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+    const allBooksSection = document.querySelector(".genres-books-section");
+    const searchInput = document.querySelector(".search-input");
+
+    allBooksSection.scrollIntoView({ behavior: "smooth" });
+
+    fetchAllBooksData(0, searchInput.value);
+
+    // Reset search input
+    searchInput.value = "";
+
+    resetPagination();
+});
 
 // || SIDE MENU ||
+
 expandSideBarBtn.addEventListener("click", () => {
     const sideBarContainer = document.querySelector(".sidebar-container-menu");
     const sideBarTextElements = sideBarContainer.querySelectorAll(
@@ -371,6 +429,31 @@ expandSideBarBtn.addEventListener("click", () => {
     });
 });
 
+// Sidebar button click event
+window.addEventListener("click", async (event) => {
+    const target = event.target.closest(".sidebar-btn");
+
+    if (target) {
+        const activeSidebarElement = document.querySelector(
+            ".sidebar-container-menu .active"
+        );
+        if (activeSidebarElement) {
+            activeSidebarElement.classList.remove("active");
+        } else {
+            target.classList.add("active");
+        }
+
+        const searchCategory = target.dataset.genre;
+        const response = await fetchAllBooksData(0, searchCategory);
+        if (!response) {
+            console.error("Failed to fetch data.");
+            // If failed to fetch data, disable the next button
+            paginationButtonNext.parentElement.classList.add("disabled");
+        }
+        resetPagination();
+    }
+});
+
 // || PAGINATION
 
 const paginationButtonPrevious = document.querySelector(
@@ -383,86 +466,137 @@ const paginationButtonMiddle = document.querySelector(
 );
 const paginationButtonLast = document.querySelector("[data-pagination=end]");
 
-function updatePaginationButtons(operation) {
-    let paginationButtonNumberLast = Number(
-        paginationButtonLast.dataset.paginationNumber
-    );
-    let paginationButtonNumberFirst = Number(
-        paginationButtonFirst.dataset.paginationNumber
-    );
-    let activePaginationElement = document.querySelector(".page-item.active");
-    let activePaginationButton =
-        activePaginationElement.querySelector("button");
+function updatePaginationButtonsNumbers(lastNumber) {
+    lastNumber++;
+    paginationButtonFirst.dataset.paginationNumber = lastNumber - 2;
+    paginationButtonMiddle.dataset.paginationNumber = lastNumber - 1;
+    paginationButtonLast.dataset.paginationNumber = lastNumber;
 
-    let currentActivePaginationNumber = Number(
+    paginationButtonFirst.textContent =
+        Number(paginationButtonFirst.dataset.paginationNumber) + 1;
+    paginationButtonMiddle.textContent =
+        Number(paginationButtonMiddle.dataset.paginationNumber) + 1;
+    paginationButtonLast.textContent =
+        Number(paginationButtonLast.dataset.paginationNumber) + 1;
+}
+
+// Update the pagination buttons next and previous
+async function updatePaginationButtons(paginationEnd) {
+    const activePaginationElement = document.querySelector(".page-item.active");
+    const activePaginationButton = activePaginationElement.querySelector("a");
+    let activePaginationNumber = Number(
         activePaginationButton.dataset.paginationNumber
     );
 
-    // Next button logic
-    if (operation === "next") {
-        // If the last button, add 1
-        if (activePaginationButton.dataset.pagination === "end") {
-            paginationButtonNumberLast++;
-            paginationButtonLast.dataset.paginationNumber =
-                paginationButtonNumberLast;
-            paginationButtonLast.textContent =
-                paginationButtonLast.dataset.paginationNumber;
-            // else - if not the last button, add 1 to the active button
-        } else {
-            // Enable the previous button on next button click
-            if (
-                paginationButtonPrevious.parentElement.classList.contains(
-                    "disabled"
-                )
-            ) {
-                paginationButtonPrevious.parentElement.classList.remove(
-                    "disabled"
-                );
-            }
-
-            currentActivePaginationNumber++;
-            activePaginationElement.classList.remove("active");
+    // If the active button is not the last button
+    if (activePaginationButton.dataset.pagination !== paginationEnd) {
+        activePaginationElement.classList.remove("active");
+        if (paginationEnd === "end") {
+            activePaginationNumber++;
+            // Remove the disabled class from the previous button
+            paginationButtonPrevious.parentElement.classList.remove("disabled");
+            // Add the active class to the next button
             activePaginationElement.nextElementSibling.classList.add("active");
-        }
-    }
-
-    // Previous button logic
-    if (
-        operation === "previous" &&
-        activePaginationButton.dataset.pagination !== "start"
-    ) {
-        if (paginationButtonNumberFirst > 1) {
-            paginationButtonNumberLast--;
-            paginationButtonLast.dataset.paginationNumber =
-                paginationButtonNumberLast;
-            paginationButtonLast.textContent = paginationButtonNumberLast;
-        } else {
-            currentActivePaginationNumber--;
-            activePaginationElement.classList.remove("active");
+        } else if (paginationEnd === "start") {
+            activePaginationNumber--;
+            // Remove the disabled class from the next button
+            paginationButtonNext.parentElement.classList.remove("disabled");
             activePaginationElement.previousElementSibling.classList.add(
                 "active"
             );
         }
+    } else {
+        updatePaginationButtonsNumbers(activePaginationNumber);
+        if (paginationEnd === "end") {
+            activePaginationNumber++;
+        } else if (paginationEnd === "start") {
+            activePaginationNumber--;
+        }
     }
 
-    paginationButtonFirst.dataset.paginationNumber =
-        paginationButtonNumberLast - 2;
-    paginationButtonMiddle.dataset.paginationNumber =
-        paginationButtonNumberLast - 1;
-    paginationButtonMiddle.textContent = paginationButtonNumberLast - 1;
-    paginationButtonFirst.textContent = paginationButtonNumberLast - 2;
-
     // Disable the previous button if the first value is reached
-    if (currentActivePaginationNumber === 1) {
+    if (activePaginationNumber === 0) {
         paginationButtonPrevious.parentElement.classList.add("disabled");
-        return;
+    }
+
+    const response = await fetchAllBooksData(
+        activePaginationNumber * NUMBER_OF_BOOKS_PER_PAGE
+    );
+
+    if (!response) {
+        console.error("Failed to fetch data.");
+        // If failed to fetch data, disable the next button
+        paginationButtonNext.parentElement.classList.add("disabled");
     }
 }
 
-paginationButtonNext.addEventListener("click", () => {
-    updatePaginationButtons("next");
+paginationButtonNext.addEventListener("click", async () => {
+    updatePaginationButtons("end");
 });
 
-paginationButtonPrevious.addEventListener("click", () => {
-    updatePaginationButtons("previous");
+paginationButtonPrevious.addEventListener("click", async () => {
+    updatePaginationButtons("start");
 });
+
+// Update pagination on click
+window.addEventListener("click", async (event) => {
+    const target = event.target;
+    const activePaginationElement = document.querySelector(".page-item.active");
+
+    // Remove the disabled class from the next and previous button
+    if (
+        target.dataset.pagination === "middle" ||
+        target.dataset.pagination === "end"
+    ) {
+        paginationButtonPrevious.parentElement.classList.remove("disabled");
+    } else if (
+        target.dataset.pagination === "start" ||
+        target.dataset.pagination === "middle"
+    ) {
+        paginationButtonNext.parentElement.classList.remove("disabled");
+    }
+
+    if (target.dataset.pagination) {
+        const clickedPaginationElement = target;
+        activePaginationElement.classList.remove("active");
+        clickedPaginationElement.parentElement.classList.add("active");
+
+        const clickedPaginationNumber = Number(target.dataset.paginationNumber);
+        const response = await fetchAllBooksData(
+            clickedPaginationNumber * NUMBER_OF_BOOKS_PER_PAGE
+        );
+
+        if (!response) {
+            console.error("Failed to fetch data.");
+            // If failed to fetch data, disable the next button
+            paginationButtonNext.parentElement.classList.add("disabled");
+        }
+    }
+});
+
+function resetPagination() {
+    const activePaginationElement = document.querySelector(".page-item.active");
+    const previousPaginationElement = document.querySelector(
+        ".pagination-previous-element "
+    );
+    const firstPaginationButton = document.querySelector(
+        "[data-pagination=start]"
+    );
+    const secondPaginationButton = document.querySelector(
+        "[data-pagination=middle]"
+    );
+    const thirdPaginationButton = document.querySelector(
+        "[data-pagination=end]"
+    );
+    previousPaginationElement.classList.add("disabled");
+
+    firstPaginationButton.dataset.paginationNumber = 0;
+    firstPaginationButton.textContent = 1;
+    secondPaginationButton.dataset.paginationNumber = 1;
+    secondPaginationButton.textContent = 2;
+    thirdPaginationButton.dataset.paginationNumber = 2;
+    thirdPaginationButton.textContent = 3;
+
+    activePaginationElement.classList.remove("active");
+    firstPaginationButton.parentElement.classList.add("active");
+}

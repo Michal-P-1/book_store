@@ -1,17 +1,24 @@
 /* Overwrite default bootstrap */
 :root {
     --primary-color: white;
-    --secondary-color: #001f3f;
+    --secondary-color: white;
     --primary-color-darker: color-mix(
         in srgb,
         var(--primary-color),
-        var(--secondary-color) 5%
+        var(--secondary-color) 50%
+    );
+    --secondary-color-lighter: color-mix(
+        in srgb,
+        var(--secondary-color),
+        var(--primary-color) 10%
     );
     --font-type-primary: "Lexend Giga", sans-serif;
     --font-type-secondary: "Poppins", sans-serif;
 }
+
 .btn {
     width: fit-content;
+    /* height: 2.2rem; */
 }
 
 .bg-primary {
@@ -23,18 +30,27 @@
 }
 
 .btn-primary {
+    background-color: var(--primary-color-darker) !important;
+    border-color: var(--primary-color-darker) !important;
+    color: var(--secondary-color) !important;
+}
+
+.btn-primary:hover {
     background-color: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
     border-color: var(--primary-color) !important;
 }
 
 .btn-secondary {
     opacity: 0.8;
-    background-color: var(--secondary-color) !important;
-    border-color: var(--secondary-color) !important;
+    background-color: var(--secondary-color-lighter) !important;
+    color: var(--primary-color) !important;
+    border-color: var(--secondary-color-lighter) !important;
 }
 
 .btn-secondary:hover {
     opacity: 1;
+    color: var(--primary-color) !important;
     background-color: var(--secondary-color) !important;
     border-color: var(--secondary-color) !important;
 }
@@ -48,9 +64,37 @@
 }
 
 /* Own css classes */
+/* html { */
+/* -ms-overflow-style: none; /* IE and Edge */
+/* scrollbar-width: none; Firefox */
+/* width: 100%; */
+/* } */
+
+/* html::-webkit-scrollbar {
+    /* display: none; 
+} */
+html {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-type-primary);
+    /* width: 100%; */
+    min-width: 100vw;
 }
+
+#cart-summary-container {
+    top: 4.6rem;
+    height: 75vh;
+    width: max(10vw, 12rem);
+}
+/* 
+#cart-button {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+} */
 
 .header {
     background: no-repeat center center/cover;
@@ -62,6 +106,10 @@ body {
     opacity: 0.95;
     animation: onload 4s ease-in-out;
     transition: opacity 2s ease;
+}
+
+#contact-link:hover {
+    color: var(--secondary-color) !important;
 }
 
 #carousel-left-button,
@@ -92,6 +140,10 @@ body {
     height: 20rem;
 }
 
+.recommended-spinner-border-container {
+    height: 20rem;
+}
+
 #carouselRecommendedBooks {
     max-width: max(55rem, 80%);
 }
@@ -118,27 +170,15 @@ body {
     font-family: var(--font-type-secondary);
 }
 
-.nav-link {
-    color: var(--primary-color-darker);
-}
-
-.nav-link.active {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-.nav-link:hover {
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
 .sidebar-container {
     width: min(30vw, 18rem);
     top: 4.6rem;
+    /* overflow: scroll; */
 }
 
 .sidebar-container-menu {
     transition: all 0.5s ease;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -150,15 +190,42 @@ body {
     display: inline-block !important;
 }
 
-/* || GENRE BOOKS CARD */
+.sidebar-btn {
+    text-align: left;
+}
+
+.sidebar-btn.active,
+.sidebar-btn:hover {
+    color: white;
+    font-weight: bold;
+}
+
+/* || GENRE BOOKS  */
+/* TODO */
+.genres-books-section {
+    width: calc(100vw - min(30vw, 18rem)) !important;
+    /* /* width: 60%;  */
+}
+
 .genre-books-card {
     font-family: var(--font-type-secondary);
     width: 15rem;
-    max-height: 550px;
+    height: 450px;
     overflow: scroll;
+    /*  -ms-overflow-style: none; IE and Edge 
+    scrollbar-width: none; Firefox */
 
     /* min-width: 25rem; */
     /* height: 20rem;s */
+}
+
+.genre-books-card::-webkit-scrollbar {
+    display: none;
+}
+
+.spinner-border {
+    height: 3rem;
+    width: 3rem;
 }
 
 .genre-books-card .card-img-top {
@@ -181,6 +248,12 @@ body {
 }
 
 /* RESPONSIVE */
+
+@media (max-width: 991px) {
+    #cart-button {
+        height: 2.5rem;
+    }
+}
 
 @media (max-width: 767px) {
     .recommended-books-card {
@@ -210,11 +283,16 @@ body {
 
     .sidebar-expanded {
         position: absolute;
-        width: 65vw !important;
+        width: min(85vw, 18rem) !important;
     }
 
     .sidebar-title {
         font-size: 1rem !important;
+    }
+
+    .genres-books-section {
+        width: calc(100vw - min(22vw, 18rem)) !important;
+        /* /* width: 60%;  */
     }
 
     .genre-books-card {
