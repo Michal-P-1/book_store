@@ -167,19 +167,23 @@ window.addEventListener("scroll", () => {
         navbar.classList.add("bg-secondary", "navbar-dark", "opacity-100");
         searchButton.classList.remove("btn-secondary");
         searchButton.classList.add("btn-primary");
-        // cartButton.classList.remove("btn-secondary");
-        // cartButton.classList.add("btn-primary");
-        // cartBadge.classList.remove("bg-primary", "text-secondary");
-        // cartBadge.classList.add("bg-secondary", "text-primary");
+        cartButton.classList.remove(
+            "bg-primary",
+            "text-secondary",
+            "opacity-95"
+        );
+        cartButton.classList.add("bg-secondary", "text-primary");
+        cartBadge.classList.remove("bg-secondary", "text-primary");
+        cartBadge.classList.add("bg-primary", "text-secondary");
     } else {
-        navbar.classList.remove("bg-secondary", "navbar-dark", "opacity-100");
+        navbar.classList.remove("bg-secondary", "navbar-dark");
         navbar.classList.add("bg-primary", "navbar-white", "opacity-95");
         searchButton.classList.remove("btn-primary");
         searchButton.classList.add("btn-secondary");
-        // cartButton.classList.remove("btn-primary");
-        // cartButton.classList.add("btn-secondary");
-        // cartBadge.classList.remove("bg-secondary", "text-primary");
-        // cartBadge.classList.add("bg-primary", "text-secondary");
+        cartButton.classList.remove("bg-secondary", "text-primary");
+        cartButton.classList.add("bg-primary", "text-secondary");
+        cartBadge.classList.remove("bg-primary", "text-secondary");
+        cartBadge.classList.add("bg-secondary", "text-primary");
     }
 });
 
@@ -254,12 +258,15 @@ function displayRecommendedBooks(booksData) {
 
         bookCardId.dataset.recommendedBookId = book.id;
         bookCardImg.src = book.volumeInfo.imageLinks.thumbnail;
+        bookCardImg.dataset.recommendedBookImg =
+            book.volumeInfo.imageLinks.thumbnail;
         bookCardTitle.textContent = book.volumeInfo.title;
+        bookCardTitle.dataset.recommendedBookTitle = book.volumeInfo.title;
         bookCardAuthor.textContent = book.volumeInfo.authors;
         bookCardCategory.textContent = book.volumeInfo.categories;
         const price = book.saleInfo?.listPrice?.amount || "8.99";
         bookCardPrice.textContent = `£${price}`;
-        // bookCardPrice.dataset.recommendedBookPrice = price;
+        bookCardPrice.dataset.recommendedBookPrice = price;
 
         recommendedBooksContainer.appendChild(recommendedBookCardTemplateCopy);
 
@@ -381,12 +388,15 @@ function displayAllBooks(booksData) {
         if (bookCardImg.src === "") {
             bookCardImg.src = "../images/Icons/book_placeholder.png";
         }
+        bookCardImg.dataset.genreBookImg = bookCardImg.src;
 
         bookCardTitle.textContent = book.volumeInfo.title;
+        bookCardTitle.dataset.genreBookTitle = book.volumeInfo.title;
         bookCardAuthor.textContent = book.volumeInfo.authors;
         bookCardCategory.textContent = book.volumeInfo.categories;
         const price = book.saleInfo?.listPrice?.amount || "8.99";
         bookCardPrice.textContent = `£${price}`;
+        bookCardPrice.dataset.genreBookPrice = price;
         bookCardId.dataset.genreBookId = book.id;
 
         allBooksContainer.appendChild(allBookCardTemplateCopy);
