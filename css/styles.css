@@ -77,10 +77,21 @@ body {
     min-width: 100vw;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
 #cart-summary-section {
     top: 4.6rem;
     height: 75vh;
-    width: min(65vw, 16rem);
+    width: min(70vw, 20rem);
 }
 
 #cart-button {
@@ -112,7 +123,9 @@ body {
 }
 
 [data-cart-book-title] {
-    font-size: clamp(0.875rem, -0.25rem + 6vw, 1.25rem);
+    font-size: clamp(0.75rem, 0.5625rem + 1vw, 1rem);
+    max-height: 8rem;
+    /* font-size: clamp(0.875rem, -0.25rem + 6vw, 1.25rem); */
 }
 
 [data-cart-book-delete] {
@@ -122,6 +135,18 @@ body {
 
 [data-cart-book-delete]:hover {
     transform: scale(1.2);
+}
+
+.remove-item-modal {
+    font-size: clamp(0.75rem, 0.5625rem + 1vw, 1rem);
+    height: 50%;
+    width: 90%;
+    bottom: 25%;
+    left: 5%;
+}
+
+.remove-item-modal-btn {
+    font-size: clamp(0.5rem, 0.3333rem + 0.9524vw, 0.75rem);
 }
 
 /* 
@@ -297,6 +322,15 @@ body {
 }
 
 @media (max-width: 767px) {
+    [data-cart-book-title] {
+        max-width: 8rem;
+    }
+
+    [data-cart-book-img] {
+        width: 40px;
+        height: 80px;
+    }
+
     #carousel {
         top: 60vh !important;
     }

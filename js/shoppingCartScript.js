@@ -38,15 +38,27 @@ window.addEventListener("click", (e) => {
     }
 });
 
-// Remove items from the shopping cart
+// Modal for removing items from the shopping cart
 window.addEventListener("click", (e) => {
-    const target = e.target.closest("[data-cart-book-remove]");
+    const target = e.target.closest(".shopping-summary-card");
 
     if (target) {
-        const targetParentElement = e.target.closest("[data-cart-book-id]");
+        const removeItemModal = target.querySelector(".remove-item-modal");
+        const removeItemModalBackdrop = target.querySelector(
+            ".remove-item-modal-backdrop"
+        );
 
+        removeItemModalBackdrop.classList.remove("visually-hidden");
+        removeItemModal.classList.remove("visually-hidden");
+    }
+});
+
+// Remove items from the shopping cart
+window.addEventListener("click", (e) => {
+    const target = e.target.closest(".remove-item-modal-btn-yes");
+    if (target) {
+        const targetParentElement = target.closest("[data-cart-book-id]");
         const bookId = targetParentElement.dataset.cartBookId;
-
         removeBookFromShoppingCart(bookId);
         displayCartBooks(shoppingCartBooks);
         calculateTotalPrice();
