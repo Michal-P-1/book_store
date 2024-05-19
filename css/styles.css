@@ -123,6 +123,10 @@ body {
 
 /* CART BOOK CART */
 
+.shopping-summary-card {
+    background-color: rgb(235, 235, 235);
+}
+
 [data-cart-book-img] {
     width: 60px;
     height: 100px;
