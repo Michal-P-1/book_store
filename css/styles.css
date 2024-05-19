@@ -96,6 +96,7 @@ body {
 
 #cart-button {
     transition: transform 0.5s ease;
+    width: 5rem;
     /* position: absolute; */
     /* right: 1rem; */
     /* height: 100%; */
