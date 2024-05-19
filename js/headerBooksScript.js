@@ -6,7 +6,7 @@ const header = document.querySelector("header");
 const navbar = document.querySelector("#navbar");
 const searchButton = document.querySelector(".search-btn");
 const cartButton = document.querySelector("#cart-button");
-const cartBadge = cartButton.querySelector("#cart-badge");
+const cartBadge = cartButton.querySelector("#cart-quantity-badge");
 const contactButton = document.querySelector("#contact-link");
 
 // COLURS FOR DIFFERENT GENRES
@@ -16,7 +16,7 @@ const DETECTIVE_FICTION_COLOURS = { primary: "#EEEEEE", secondary: "#b7410e" };
 
 // IMAGES FOR DIFFERENT GENRES
 const SCIENCE_FICTION_IMAGE =
-    "url('../images/hero-images/science-fiction_4.jpg')";
+    "url('../images/hero-images/science-fiction-4.jpg')";
 const FANTASY_IMAGE = "url('../images/hero-images/fantasy.jpg')";
 const DETECTIVE_FICTION_IMAGE = "url('../images/hero-images/detective.jpg')";
 

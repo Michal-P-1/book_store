@@ -3,9 +3,6 @@ const shoppingCartSummarySection = document.querySelector(
     "#cart-summary-section"
 );
 const shoppingCartSummary = document.querySelector("#cart-summary-container");
-const removeBookFromShoppingCartButton = document.querySelector(
-    "[data-cart-book-remove]"
-);
 const cartTotalElement = document.querySelector("[data-cart-total]");
 const shoppingCartTotalTitle = document.querySelector(".cart-total-title");
 
@@ -34,36 +31,90 @@ window.addEventListener("click", (e) => {
             ? target
             : {};
         displayCartBooks(shoppingCartBooks);
+        updateCartBadgeQuantity();
         calculateTotalPrice();
     }
 });
 
 // Modal for removing items from the shopping cart
 window.addEventListener("click", (e) => {
-    const target = e.target.closest(".shopping-summary-card");
+    const removeItemCartButton = e.target.closest(".cart-remove-item-btn");
 
-    if (target) {
-        const removeItemModal = target.querySelector(".remove-item-modal");
-        const removeItemModalBackdrop = target.querySelector(
-            ".remove-item-modal-backdrop"
+    if (removeItemCartButton) {
+        const targetMainElement = removeItemCartButton.closest(
+            "[data-cart-book-id]"
         );
 
-        removeItemModalBackdrop.classList.remove("visually-hidden");
-        removeItemModal.classList.remove("visually-hidden");
+        getBookId = targetMainElement.dataset.cartBookId;
+        const isLastItem = shoppingCartBooks.find((book) => {
+            if (book.bookId === getBookId && book.numberOfItems === 1) {
+                return true;
+            }
+        });
+
+        // If the item is the last item in the shopping cart, display the modal
+        if (isLastItem) {
+            const removeItemModal =
+                targetMainElement.querySelector(".remove-item-modal");
+            const removeItemModalBackdrop = targetMainElement.querySelector(
+                ".remove-item-modal-backdrop"
+            );
+            removeItemModalBackdrop.classList.remove("visually-hidden");
+            removeItemModal.classList.remove("visually-hidden");
+        }
+
+        // If the item is not the last item in the shopping cart, remove the item
+        if (!isLastItem) {
+            removeBookFromShoppingCart(getBookId);
+            updateCartBadgeQuantity();
+            displayCartBooks(shoppingCartBooks);
+            calculateTotalPrice();
+        }
     }
 });
 
-// Remove items from the shopping cart
+// Cart modal buttons functionality
 window.addEventListener("click", (e) => {
-    const target = e.target.closest(".remove-item-modal-btn-yes");
-    if (target) {
-        const targetParentElement = target.closest("[data-cart-book-id]");
-        const bookId = targetParentElement.dataset.cartBookId;
-        removeBookFromShoppingCart(bookId);
+    const targetModalRemoveItemButtonYes = e.target.closest(
+        ".remove-item-modal-btn-yes"
+    );
+    const targetModalRemoveItemButtonNo = e.target.closest(
+        ".remove-item-modal-btn-no"
+    );
+
+    if (targetModalRemoveItemButtonYes) {
+        removeBookFromShoppingCart(getBookId);
+        updateCartBadgeQuantity();
         displayCartBooks(shoppingCartBooks);
         calculateTotalPrice();
+    } else if (targetModalRemoveItemButtonNo) {
+        const mainElement = targetModalRemoveItemButtonNo.closest(
+            "[data-cart-book-id]"
+        );
+        mainElement
+            .querySelector(".remove-item-modal")
+            .classList.add("visually-hidden");
+        mainElement
+            .querySelector(".remove-item-modal-backdrop")
+            .classList.add("visually-hidden");
     }
 });
+
+function updateCartBadgeQuantity() {
+    const cartBadgeQuantity = document.getElementById("cart-quantity-badge");
+    let totalQuantity = 0;
+
+    shoppingCartBooks.forEach((book) => {
+        totalQuantity += book.numberOfItems;
+    });
+
+    if (totalQuantity === 0) {
+        cartBadgeQuantity.classList.add("visually-hidden");
+    } else {
+        cartBadgeQuantity.classList.remove("visually-hidden");
+        cartBadgeQuantity.textContent = totalQuantity;
+    }
+}
 
 function calculateTotalPrice() {
     let totalPrice = 0;
