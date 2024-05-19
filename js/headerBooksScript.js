@@ -388,7 +388,7 @@ function displayAllBooks(booksData) {
         // If the book has no image, set a default image
         bookCardImg.src = book?.volumeInfo?.imageLinks?.thumbnail || "";
         if (bookCardImg.src === "") {
-            bookCardImg.src = "../images/Icons/book_placeholder.png";
+            bookCardImg.src = "./images/Icons/book_placeholder.png";
         }
         bookCardImg.dataset.genreBookImg = bookCardImg.src;
 
