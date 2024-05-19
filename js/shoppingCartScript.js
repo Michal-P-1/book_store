@@ -1,3 +1,11 @@
+// TODO:
+// 1. Add about us page
+// 2. Add contact us page
+// 3. Shopping cart functionality across the pages
+// 4. Rename pictures
+// 5. Currency function
+// 6. Bundler ?? maybaaa
+
 const shoppingCartButton = document.querySelector("#cart-button");
 const shoppingCartSummarySection = document.querySelector(
     "#cart-summary-section"

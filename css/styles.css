@@ -277,7 +277,7 @@ body {
 }
 
 /* || GENRE BOOKS  */
-/* TODO */
+
 .genres-books-section {
     width: calc(100vw - min(30vw, 18rem)) !important;
     /* /* width: 60%;  */
