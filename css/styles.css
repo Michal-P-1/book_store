@@ -308,6 +308,14 @@ body {
     height: 120px;
 }
 
+[data-book-title] {
+    height: 5rem;
+}
+
+[data-book-author] {
+    height: 4rem;
+}
+
 /* || ANIMATIONS */
 
 @keyframes onload {
