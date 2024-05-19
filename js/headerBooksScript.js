@@ -38,8 +38,8 @@ const DETECTIVE_FICTION_SHELF_ID = 1003;
 carouselLeftButton.addEventListener("click", () => {
     changeHeaderBackgroundEffect();
     if (currentColorTheme.dataset.colorTheme === "science-fiction") {
-        setColourTheme("crime", CHANGE_THEME_TIME / 2);
-    } else if (currentColorTheme.dataset.colorTheme === "crime") {
+        setColourTheme("detective-fiction", CHANGE_THEME_TIME / 2);
+    } else if (currentColorTheme.dataset.colorTheme === "detective-fiction") {
         setColourTheme("fantasy", CHANGE_THEME_TIME / 2);
     } else if (currentColorTheme.dataset.colorTheme === "fantasy") {
         setColourTheme("science-fiction", CHANGE_THEME_TIME / 2);
@@ -58,8 +58,8 @@ carouselLeftButton.addEventListener("click", () => {
 carouselRightButton.addEventListener("click", () => {
     changeHeaderBackgroundEffect();
     if (currentColorTheme.dataset.colorTheme === "science-fiction") {
-        setColourTheme("crime", CHANGE_THEME_TIME / 2);
-    } else if (currentColorTheme.dataset.colorTheme === "crime") {
+        setColourTheme("detective-fiction", CHANGE_THEME_TIME / 2);
+    } else if (currentColorTheme.dataset.colorTheme === "detective-fiction") {
         setColourTheme("fantasy", CHANGE_THEME_TIME / 2);
     } else if (currentColorTheme.dataset.colorTheme === "fantasy") {
         setColourTheme("science-fiction", CHANGE_THEME_TIME / 2);
@@ -90,7 +90,7 @@ function setColourTheme(colourTheme, delay) {
         colourSecondary = FANTASY_COLOURS.secondary;
         headerBackgroundImage = FANTASY_IMAGE;
         themeName = FANTASY_TEXT;
-    } else if (colourTheme === "crime") {
+    } else if (colourTheme === "detective-fiction") {
         colourPrimary = DETECTIVE_FICTION_COLOURS.primary;
         colourSecondary = DETECTIVE_FICTION_COLOURS.secondary;
         headerBackgroundImage = DETECTIVE_FICTION_IMAGE;
@@ -218,6 +218,7 @@ async function fetchRecommendedBooksData(shelfId) {
     );
 
     const recommendedBooks = await response.json();
+
     // Hide spinner after fetching data
     spinner.classList.add("visually-hidden");
 
@@ -283,7 +284,7 @@ function getRecommendedBooksShelfId() {
         shelfId = SCIENCE_FICTION_SHELF_ID;
     } else if (currentColorTheme.dataset.colorTheme === "fantasy") {
         shelfId = FANTASY_SHELF_ID;
-    } else if (currentColorTheme.dataset.colorTheme === "crime") {
+    } else if (currentColorTheme.dataset.colorTheme === "detective-fiction") {
         shelfId = DETECTIVE_FICTION_SHELF_ID;
     }
 
@@ -298,7 +299,7 @@ function updateGenresBooksTitleAndSidebar(searchQuery) {
     let genreName = "";
 
     // Update the title of the genres books
-    if (searchQuery === "crime") {
+    if (searchQuery === "detective-fiction") {
         genreName = "Detective Fiction";
     } else if (searchQuery === "fantasy") {
         genreName = "Fantasy";
