@@ -1,3 +1,9 @@
+import {
+    saveToSessionStorage,
+    getFromSessionStorage,
+} from "../utils/sessionStorageManipulation.js";
+
+const LOCAL_STORAGE_SUFFIX = "cart-items";
 // TODO:
 // 1. Add about us page
 // 2. Add contact us page
@@ -14,7 +20,11 @@ const shoppingCartSummary = document.querySelector("#cart-summary-container");
 const cartTotalElement = document.querySelector("[data-cart-total]");
 const shoppingCartTotalTitle = document.querySelector(".cart-total-title");
 
-const shoppingCartBooks = [];
+const shoppingCartBooks = getFromSessionStorage(LOCAL_STORAGE_SUFFIX) || [];
+
+const initialCartData = displayCartBooks(shoppingCartBooks);
+const initialCartQuantiy = updateCartBadgeQuantity();
+const initialTotalPrice = calculateTotalPrice();
 
 shoppingCartButton.addEventListener("click", () => {
     if (shoppingCartSummarySection.classList.contains("visually-hidden")) {
@@ -39,6 +49,7 @@ window.addEventListener("click", (e) => {
             ? target
             : {};
         displayCartBooks(shoppingCartBooks);
+        saveToSessionStorage(LOCAL_STORAGE_SUFFIX, shoppingCartBooks);
         updateCartBadgeQuantity();
         calculateTotalPrice();
     }
@@ -47,6 +58,7 @@ window.addEventListener("click", (e) => {
 // Modal for removing items from the shopping cart
 window.addEventListener("click", (e) => {
     const removeItemCartButton = e.target.closest(".cart-remove-item-btn");
+    let getBookId = "";
 
     if (removeItemCartButton) {
         const targetMainElement = removeItemCartButton.closest(
@@ -75,6 +87,7 @@ window.addEventListener("click", (e) => {
         if (!isLastItem) {
             removeBookFromShoppingCart(getBookId);
             updateCartBadgeQuantity();
+            saveToSessionStorage(LOCAL_STORAGE_SUFFIX, shoppingCartBooks);
             displayCartBooks(shoppingCartBooks);
             calculateTotalPrice();
         }
@@ -83,16 +96,21 @@ window.addEventListener("click", (e) => {
 
 // Cart modal buttons functionality
 window.addEventListener("click", (e) => {
+    let getBookId = "";
     const targetModalRemoveItemButtonYes = e.target.closest(
         ".remove-item-modal-btn-yes"
     );
     const targetModalRemoveItemButtonNo = e.target.closest(
         ".remove-item-modal-btn-no"
     );
+    const targetMainElement = e.target.closest("[data-cart-book-id]");
+
+    getBookId = targetMainElement?.dataset?.cartBookId;
 
     if (targetModalRemoveItemButtonYes) {
         removeBookFromShoppingCart(getBookId);
         updateCartBadgeQuantity();
+        saveToSessionStorage(LOCAL_STORAGE_SUFFIX, shoppingCartBooks);
         displayCartBooks(shoppingCartBooks);
         calculateTotalPrice();
     } else if (targetModalRemoveItemButtonNo) {

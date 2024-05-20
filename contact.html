@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./css/fontawesome.css" />
+        <link rel="stylesheet" href="./css/bootstrap.css" />
+        <link rel="stylesheet" href="./css/styles.css" />
+        <script src="./js/bootstrap.bundle.min.js" defer></script>
+        <script src="./js/navbar.js" type="module"></script>
+        <script src="./js/shoppingCartScript.js" type="module"></script>
+        <title>Bootstrap 5 Starter</title>
+    </head>
+    <body id="body w-100 bg-primary ">
+        <section
+            id="cart-summary-section"
+            class="position-fixed end-0 visually-hidden z-3"
+        >
+            <div
+                class="container bg-white h-100 border border-3 border-dark rounded-2 shadow-lg overflow-scroll"
+            >
+                <h5 class="text-center text-secondary my-3">Shopping cart</h5>
+                <div id="cart-summary-container"></div>
+
+                <h5
+                    class="cart-total-title visually-hidden text-center text-secondary mt-5 mb-1 fw-lighter fs-3"
+                >
+                    Total
+                </h5>
+                <p
+                    data-cart-total
+                    class="border border-1 border-secondary text-center visually-hidden"
+                ></p>
+            </div>
+        </section>
+
+        <header class="header header-navbar w-100">
+            <!-- Navigation -->
+            <nav
+                id="navbar"
+                class="navbar navbar-expand-lg fixed-top navbar-white bg-primary vw-100"
+            >
+                <div class="container d-flex">
+                    <a class="navbar-brand" href="index.html">
+                        <i class="fa-solid fa-book-open"></i>
+                        Bookstore</a
+                    >
+
+                    <div
+                        class="order-0 order-lg-2 d-flex justify-content-center"
+                    >
+                        <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div
+                            class="cart-button-container d-flex justify-content-center align-items-center"
+                        >
+                            <div
+                                id="cart-button"
+                                class="bg-primary fs-5 text-secondary border-0 d-flex align-items-center"
+                            >
+                                <i
+                                    class="fa-solid fa-cart-shopping fa-lg opacity-75 p-1"
+                                ></i>
+                                <span
+                                    id="cart-quantity-badge"
+                                    class="badge bg-secondary text-primary rounded-5 visually-hidden"
+                                >
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="collapse navbar-collapse z-5"
+                        id="navbarNavDropdown"
+                    >
+                        <ul
+                            class="order-2 order-lg-0 navbar-nav ms-auto align-items-center"
+                        >
+                            <li class="nav-item">
+                                <a
+                                    href="about.html"
+                                    class="nav-link fw-semibold"
+                                    >About</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="contact.html"
+                                    id="contact-link"
+                                    class="nav-link fw-semibold btn btn-primary px-4 mx-4 active"
+                                    >Contact</a
+                                >
+                            </li>
+                        </ul>
+                        <form
+                            class="order-1 order-lg-1 d-flex align-items-center visually-hidden"
+                        >
+                            <input
+                                class="form-control search-input me-2 h-75"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                            />
+                            <button
+                                class="btn btn-secondary search-btn search-btn-secondary"
+                                type="submit"
+                            >
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div
+            class="bg-white p-5 d-flex flex-column justify-content-center align-items-center fs-5"
+        >
+            <h1 class="py-4 fw-lighter display-4 text-secondary">Contact us</h1>
+            <h5 class="pb-3 fw-bold text-center">
+                "Connecting Readers, One Page at a Time"
+            </h5>
+            <p class="contact-us-paragraph fw-light text-center">
+                At Bookstore, we love to hear from our readers. Whether you have
+                a question about your order, need a book recommendation, or want
+                to share your thoughts on a recent read, we’re here for you.
+                Your feedback helps us improve and serve you better. Feel free
+                to reach out to us through the contact form below.
+            </p>
+        </div>
+        <div class="bg-white py-5">
+            <form
+                class="contact-form bg-white contact-form border border-1 border-secondary rounded-2 p-4 w-50 mx-auto"
+            >
+                <h3 class="text-center text-secondary fw-lighter">
+                    Contact Form
+                </h3>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        placeholder="Enter your name"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        placeholder="Enter your email"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea
+                        class="form-control"
+                        id="message"
+                        rows="3"
+                        placeholder="Enter your message"
+                        no-resize
+                    ></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button
+                        type="submit"
+                        class="contact-form-btn btn btn-primary w-100 fw-bold py-2 align-self-end"
+                    >
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- SHOPPING SUMMARY CARD -->
+
+        <template id="shopping-summary-card-template">
+            <div
+                class="shopping-summary-card card border border-1 my-3 position-relative rounded-2"
+                data-cart-book-id
+            >
+                <div
+                    class="remove-item-modal-backdrop bg-dark position-absolute h-100 w-100 opacity-75 visually-hidden"
+                ></div>
+                <div
+                    class="remove-item-modal rounded-2 position-absolute d-flex flex-column bg-white border shadow visually-hidden"
+                >
+                    <div
+                        class="remove-item-modal-header text-center border-bottom"
+                    >
+                        Remove this item?
+                    </div>
+                    <div class="remove-item-modal-body m-auto">
+                        <button
+                            class="remove-item-modal-btn remove-item-modal-btn-yes btn btn-sm btn-danger"
+                        >
+                            YES
+                        </button>
+                        <button
+                            class="remove-item-modal-btn remove-item-modal-btn-no btn btn-sm btn-secondary"
+                        >
+                            CANCEL
+                        </button>
+                    </div>
+                </div>
+                <div
+                    class="card-body d-flex flex-md-column align-items-center text-center"
+                >
+                    <div
+                        class="d-flex justify-content-between align-items-center"
+                    >
+                        <img
+                            src="..."
+                            class="card-img-top border rounded-2 me-3"
+                            alt="..."
+                            data-cart-book-img
+                        />
+                        <div
+                            class="d-flex flex-column justify-content-center pt-2"
+                        >
+                            <p
+                                data-cart-book-title
+                                class="card-title overflow-auto"
+                            >
+                                Card title
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="d-flex align-items-center justify-content-center m-2 border-1 border-dark border-top"
+                >
+                    <span data-cart-book-quantity class="text-center"></span>
+                    <span class="text-secondary">x</span>
+                    <span data-cart-book-price class="card-text">Price</span>
+                    <button
+                        data-cart-book-remove
+                        class="cart-remove-item-btn ms-2 btn text-danger border-0"
+                    >
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+        </template>
+
+        <footer class="bg-secondary text-primary text-center py-3">
+            <p class="m-0">
+                &copy; 2024 Myky's Bookstore. All rights reserved.
+            </p>
+        </footer>
+    </body>
+</html>

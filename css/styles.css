@@ -96,20 +96,11 @@ body {
 
 #cart-button {
     transition: transform 0.5s ease;
-    /* width: 100%; */
-    /* position: absolute; */
-    /* right: 1rem; */
-    /* height: 100%; */
-}
-
-#cart-button:hover {
-    /* transform: scale(1.2); */
-    /* color: white !important; */
+    cursor: pointer;
 }
 
 .active-btn {
     transform: scale(1.2);
-    /* color: var(--primary-color) !important; */
 }
 
 .cart-button-container {
@@ -117,7 +108,7 @@ body {
 }
 
 #cart-quantity-badge {
-    width: 1.3rem;
+    width: 1.5rem;
     font-size: 0.6rem;
 }
 
@@ -160,24 +151,24 @@ body {
     font-size: clamp(0.5rem, 0.3333rem + 0.9524vw, 0.75rem);
 }
 
-/* 
-#cart-button {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    color: var(--secondary-color) !important;
-} */
-
-.header {
+.header-full-screen {
     background: no-repeat center center/cover;
     height: 100vh;
+}
+
+.header-navbar {
+    margin-top: 4.5rem;
 }
 
 .navbar {
     font-family: var(--font-type-secondary);
     padding: 1rem;
     opacity: 0.95;
-    animation: onload 4s ease-in-out;
     transition: opacity 2s ease;
+}
+
+.navbar-animation-on {
+    animation: onload 3s ease-in-out;
 }
 
 .navbar-brand {
@@ -287,12 +278,6 @@ body {
     font-family: var(--font-type-secondary);
     width: 15rem;
     height: 450px;
-    overflow: scroll;
-    /*  -ms-overflow-style: none; IE and Edge 
-    scrollbar-width: none; Firefox */
-
-    /* min-width: 25rem; */
-    /* height: 20rem;s */
 }
 
 .genre-books-card::-webkit-scrollbar {
@@ -315,6 +300,19 @@ body {
 
 [data-book-author] {
     height: 4rem;
+}
+/* ABOUT US PAGE */
+.about-us-paragraph,
+.contact-us-paragraph {
+    max-width: 750px;
+}
+
+/* CONTACT PAGE */
+.contact-form {
+    max-width: 600px;
+}
+.contact-form-btn {
+    width: fit-content !important;
 }
 
 /* || ANIMATIONS */
@@ -354,7 +352,7 @@ body {
         top: 60vh !important;
     }
 
-    .header {
+    .header-full-screen {
         height: 75vh;
     }
 
@@ -399,5 +397,10 @@ body {
 
     .genre-books-card {
         width: 90%;
+    }
+
+    /* CONTACT US PAGE */
+    .contact-form {
+        width: 97% !important;
     }
 }
