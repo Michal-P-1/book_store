@@ -5,7 +5,8 @@ import {
 
 const LOCAL_STORAGE_SUFFIX = "cart-items";
 // TODO:
-// 1. Add nimation to the remove from cart modal
+// 1. Add animation to the remove from cart modal
+// 2. Add animation to the cart button - opacity + dark colour
 // 5. Currency function
 // 6. Bundler ?? maybaaa
 
