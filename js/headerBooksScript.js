@@ -1,9 +1,15 @@
+import {
+    saveToSessionStorage,
+    getFromSessionStorage,
+} from "../utils/sessionStorageManipulation.js";
+
 // DOM ELEMENTS
 const currentColorTheme = document.querySelector("[data-color-theme]");
 const carouselLeftButton = document.querySelector("#carousel-left-button");
 const carouselRightButton = document.querySelector("#carousel-right-button");
 const header = document.querySelector("header");
 const navbar = document.querySelector("#navbar");
+// Different search button functionality for index.js and other pages, hence different class names
 const searchButton = document.querySelector(".search-btn");
 const cartButton = document.querySelector("#cart-button");
 const cartBadge = document.querySelector("#cart-quantity-badge");
@@ -27,6 +33,9 @@ const DETECTIVE_FICTION_TEXT = "Detective Fiction";
 // LOCAL STORAGE PREFIX
 const LOCAL_STORAGE_PREFIX = "BOOKSTORE_WEBSITE_";
 const CHANGE_THEME_TIME = 3000;
+
+// SESSION STORAGE SUFFIX
+const SESSION_STORAGE_SUFFIX = "search-query";
 
 // GOOGLE BOOKS API IDS
 const SCIENCE_FICTION_SHELF_ID = 1001;
@@ -406,7 +415,8 @@ function displayAllBooks(booksData) {
     });
 }
 // Initial fetch
-const initialFetch = fetchAllBooksData();
+const sessionQuery = getFromSessionStorage(SESSION_STORAGE_SUFFIX);
+const initialFetch = fetchAllBooksData(0, sessionQuery);
 
 // Seach button fetch data
 searchButton.addEventListener("click", async (event) => {

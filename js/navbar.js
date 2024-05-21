@@ -8,10 +8,14 @@ const navbar = document.querySelector("#navbar");
 const cartButton = document.querySelector("#cart-button");
 const cartBadge = document.querySelector("#cart-quantity-badge");
 // This button is used for redirection to the search page and saving the search query in session storage
+// Different search button functionality for index.js and other pages, hence different class names
 const searchButtonNavigation = document.querySelector(".search-btn-nav");
 
 // LOCAL STORAGE PREFIX
 const LOCAL_STORAGE_PREFIX = "BOOKSTORE_WEBSITE_";
+
+// SESSION STORAGE SUFFIX
+const SESSION_STORAGE_SUFFIX = "search-query";
 
 // COLURS FOR DIFFERENT GENRES
 const SCIENCE_FICTION_COLOURS = { primary: "#E6F2FF", secondary: "#001F3F" };
@@ -85,12 +89,13 @@ function setColourTheme(colourTheme) {
     );
 }
 
-searchButtonNavigation.addEventListener("click", () => {
+searchButtonNavigation.addEventListener("click", (event) => {
+    event.preventDefault();
     console.log("search button clicked");
-    const searchInput = document.querySelector(".search-nav-input");
-    const searchQuery = searchInput.value;
+    const searchNavInput = document.querySelector(".search-nav-input");
+    const searchQuery = searchNavInput.value;
 
-    saveToSessionStorage("search-query", searchQuery);
+    saveToSessionStorage(SESSION_STORAGE_SUFFIX, searchQuery);
 
-    // window.location.href = "index.html";
+    window.location.href = "index.html#genre-books-container";
 });
