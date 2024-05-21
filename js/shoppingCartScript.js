@@ -5,8 +5,7 @@ import {
 
 const LOCAL_STORAGE_SUFFIX = "cart-items";
 // TODO:
-// 1. Add search word to the session storage
-// 2. If search word is in the session storage, display the search results
+// 1. Add home to navbar
 // 5. Currency function
 // 6. Bundler ?? maybaaa
 
