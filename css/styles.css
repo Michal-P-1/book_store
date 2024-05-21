@@ -315,6 +315,10 @@ body {
     width: fit-content !important;
 }
 
+textarea {
+    resize: none;
+}
+
 /* || ANIMATIONS */
 
 @keyframes onload {

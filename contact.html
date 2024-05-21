@@ -105,20 +105,20 @@
                             </li>
                         </ul>
                         <form
-                            class="order-1 order-lg-1 d-flex align-items-center visually-hidden"
+                            class="order-1 order-lg-1 d-flex align-items-center"
                         >
                             <input
-                                class="form-control search-input me-2 h-75"
+                                class="form-control search-nav-input me-2 h-75"
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
                             />
-                            <button
-                                class="btn btn-secondary search-btn search-btn-secondary"
-                                type="submit"
+                            <a
+                                class="search-btn-nav btn btn-secondary search-btn-secondary"
+                                href="index.html#genre-books-container"
                             >
                                 Search
-                            </button>
+                            </a>
                         </form>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                     <label for="name" class="form-label">Name</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control border"
                         id="name"
                         placeholder="Enter your name"
                     />
@@ -159,7 +159,7 @@
                     <label for="email" class="form-label">Email</label>
                     <input
                         type="email"
-                        class="form-control"
+                        class="form-control border"
                         id="email"
                         placeholder="Enter your email"
                     />
@@ -167,19 +167,18 @@
                 <div class="mb-3">
                     <label for="message" class="form-label">Message</label>
                     <textarea
-                        class="form-control"
+                        class="form-control border"
                         id="message"
                         rows="3"
                         placeholder="Enter your message"
-                        no-resize
                     ></textarea>
                 </div>
                 <div class="d-flex justify-content-end">
                     <button
                         type="submit"
-                        class="contact-form-btn btn btn-primary w-100 fw-bold py-2 align-self-end"
+                        class="contact-form-btn btn btn-secondary w-100 fw-bold py-2 align-self-end"
                     >
-                        Submit
+                        <span class="fw-lighter">Submit</span>
                     </button>
                 </div>
             </form>

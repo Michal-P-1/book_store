@@ -1,8 +1,14 @@
+// |||||||||||||||
+// index.html doesnt use this script
+// |||||||||||||||
+
+import { saveToSessionStorage } from "../utils/sessionStorageManipulation.js";
+
 const navbar = document.querySelector("#navbar");
 const cartButton = document.querySelector("#cart-button");
 const cartBadge = document.querySelector("#cart-quantity-badge");
-
-// const searchButton = document.querySelector(".search-btn");
+// This button is used for redirection to the search page and saving the search query in session storage
+const searchButtonNavigation = document.querySelector(".search-btn-nav");
 
 // LOCAL STORAGE PREFIX
 const LOCAL_STORAGE_PREFIX = "BOOKSTORE_WEBSITE_";
@@ -78,3 +84,13 @@ function setColourTheme(colourTheme) {
         colourSecondary
     );
 }
+
+searchButtonNavigation.addEventListener("click", () => {
+    console.log("search button clicked");
+    const searchInput = document.querySelector(".search-nav-input");
+    const searchQuery = searchInput.value;
+
+    saveToSessionStorage("search-query", searchQuery);
+
+    // window.location.href = "index.html";
+});

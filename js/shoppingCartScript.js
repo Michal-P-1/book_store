@@ -5,10 +5,8 @@ import {
 
 const LOCAL_STORAGE_SUFFIX = "cart-items";
 // TODO:
-// 1. Add about us page
-// 2. Add contact us page
-// 3. Shopping cart functionality across the pages
-// 4. Rename pictures
+// 1. Add search word to the session storage
+// 2. If search word is in the session storage, display the search results
 // 5. Currency function
 // 6. Bundler ?? maybaaa
 
