@@ -14,6 +14,7 @@
         <script src="./js/bootstrap.bundle.min.js" defer></script>
         <script src="./js/navbar.js" type="module"></script>
         <script src="./js/shoppingCartScript.js" type="module"></script>
+        <script src="./js/contactForm.js" type="module"></script>
         <title>Bootstrap 5 Starter</title>
     </head>
     <body id="body w-100 bg-primary ">
@@ -140,6 +141,8 @@
         </div>
         <div class="bg-white py-5">
             <form
+                action="https://getform.io/f/lbjkvqva"
+                method="POST"
                 class="contact-form bg-white contact-form border border-1 border-secondary rounded-2 p-4 w-50 mx-auto"
             >
                 <h3 class="text-center text-secondary fw-lighter">
@@ -149,6 +152,7 @@
                     <label for="name" class="form-label">Name</label>
                     <input
                         type="text"
+                        name="name"
                         class="form-control border"
                         id="name"
                         placeholder="Enter your name"
@@ -158,6 +162,7 @@
                     <label for="email" class="form-label">Email</label>
                     <input
                         type="email"
+                        name="email"
                         class="form-control border"
                         id="email"
                         placeholder="Enter your email"
@@ -168,10 +173,17 @@
                     <textarea
                         class="form-control border"
                         id="message"
+                        name="message"
                         rows="3"
                         placeholder="Enter your message"
                     ></textarea>
                 </div>
+                <!-- add hidden Honeypot input to prevent spams -->
+                <input
+                    type="hidden"
+                    name="_gotcha"
+                    style="display: none !important"
+                />
                 <div class="d-flex justify-content-end">
                     <button
                         type="submit"

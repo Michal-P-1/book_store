@@ -304,6 +304,7 @@ body {
 .about-us-paragraph,
 .contact-us-paragraph {
     max-width: 750px;
+    font-size: clamp(0.75rem, 0.3167rem + 1.0667vw, 1.25rem);
 }
 
 /* CONTACT PAGE */
