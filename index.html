@@ -16,11 +16,13 @@
         <link rel="stylesheet" href="./css/fontawesome.css" />
         <link rel="stylesheet" href="./css/bootstrap.css" />
         <link rel="stylesheet" href="./css/styles.css" />
+
         <script src="./js/bootstrap.bundle.min.js" type="module"></script>
         <script scr="./utils/saveToLocalStorage.js" type="module"></script>
         <script scr="./utils/loadFromLocalStorage.js" type="module"></script>
         <script src="./js/headerBooksScript.js" type="module"></script>
         <script src="./js/shoppingCartScript.js" type="module"></script>
+        <script src="./js/footerSetYear.js" type="module"></script>
 
         <title>Bookstore</title>
     </head>
@@ -610,7 +612,8 @@
 
         <footer class="bg-primary text-secondary text-center py-3">
             <p class="m-0">
-                &copy; 2024 Myky's Bookstore. All rights reserved.
+                &copy; <span class=".current-year">2024</span> Designed by Myky.
+                All rights reserved.
             </p>
         </footer>
     </body>
