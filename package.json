@@ -1,11 +1,13 @@
 {
-    "name": "bs5-simple-starter",
+    "name": "bookstore",
     "version": "1.0.0",
-    "description": "Starter template for Bootstrap",
-    "main": "index.js",
+    "description": "",
+    "source": "index.html",
     "scripts": {
         "sass:build": "sass --no-source-map scss:css",
-        "sass:watch": "sass --no-source-map --watch scss:css"
+        "sass:watch": "sass --no-source-map --watch scss:css",
+        "start": "parcel index.html contact.html about.html",
+        "build": "parcel build index.html contact.html about.html"
     },
     "author": "Michal Podolak",
     "license": "ISC",
@@ -13,5 +15,8 @@
         "@fortawesome/fontawesome-free": "^6.5.2",
         "bootstrap": "^5.3.3",
         "sass": "^1.75.0"
+    },
+    "devDependencies": {
+        "parcel": "^2.12.0"
     }
 }
