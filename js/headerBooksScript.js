@@ -1,7 +1,5 @@
-import {
-    saveToSessionStorage,
-    getFromSessionStorage,
-} from "../utils/sessionStorageManipulation.js";
+import { getFromSessionStorage } from "../utils/sessionStorageManipulation.js";
+import { setCurrency } from "../utils/setCurrency.js";
 
 // DOM ELEMENTS
 const currentColorTheme = document.querySelector("[data-color-theme]");
@@ -277,7 +275,7 @@ function displayRecommendedBooks(booksData) {
         bookCardAuthor.textContent = book.volumeInfo.authors;
         bookCardCategory.textContent = book.volumeInfo.categories;
         const price = book.saleInfo?.listPrice?.amount || "8.99";
-        bookCardPrice.textContent = `£${price}`;
+        bookCardPrice.textContent = setCurrency(price);
         bookCardPrice.dataset.recommendedBookPrice = price;
 
         recommendedBooksContainer.appendChild(recommendedBookCardTemplateCopy);
@@ -407,7 +405,7 @@ function displayAllBooks(booksData) {
         bookCardAuthor.textContent = book.volumeInfo.authors;
         bookCardCategory.textContent = book.volumeInfo.categories;
         const price = book.saleInfo?.listPrice?.amount || "8.99";
-        bookCardPrice.textContent = `£${price}`;
+        bookCardPrice.textContent = setCurrency(price);
         bookCardPrice.dataset.genreBookPrice = price;
         bookCardId.dataset.genreBookId = book.id;
 

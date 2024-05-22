@@ -3,10 +3,10 @@ import {
     getFromSessionStorage,
 } from "../utils/sessionStorageManipulation.js";
 
+import { setCurrency } from "../utils/setCurrency.js";
+
 const LOCAL_STORAGE_SUFFIX = "cart-items";
 // TODO:
-// 1. Add animation to the remove from cart modal
-// 2. Add animation to the cart button - opacity + dark colour
 // 5. Currency function
 // 6. Bundler ?? maybaaa
 
@@ -152,7 +152,7 @@ function calculateTotalPrice() {
     } else {
         shoppingCartTotalTitle.classList.remove("visually-hidden");
         cartTotalElement.classList.remove("visually-hidden");
-        cartTotalElement.textContent = "£" + totalPrice.toFixed(2);
+        cartTotalElement.textContent = setCurrency(totalPrice.toFixed(2));
     }
 }
 
@@ -263,7 +263,7 @@ function displayCartBooks(cartBooks) {
 
         cartBookImg.src = book.bookImgUrl;
         cartBookTitle.textContent = book.bookTitle;
-        cartBookPrice.textContent = "£" + book.bookPrice;
+        cartBookPrice.textContent = setCurrency(book.bookPrice);
         cartBookQuantity.textContent = book.numberOfItems;
 
         shoppingCartSummary.appendChild(cartBookTemplateClone);
