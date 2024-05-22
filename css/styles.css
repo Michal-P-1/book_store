@@ -225,6 +225,7 @@ body {
 }
 
 .badge {
+    height: 1.25rem;
     width: min-content;
 }
 
@@ -305,6 +306,18 @@ body {
 [data-book-author] {
     height: 4rem;
 }
+
+.added-to-cart-popup {
+    top: calc(50% - 2rem);
+    width: 80%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.added-to-cart-popup.fade {
+    opacity: 1;
+}
+
 /* ABOUT US PAGE */
 .about-us-paragraph,
 .contact-us-paragraph {

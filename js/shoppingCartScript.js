@@ -48,6 +48,7 @@ window.addEventListener("click", (e) => {
             : {};
         displayCartBooks(shoppingCartBooks);
         saveToSessionStorage(LOCAL_STORAGE_SUFFIX, shoppingCartBooks);
+        addedToCartPopup(target);
         updateCartBadgeQuantity();
         calculateTotalPrice();
     }
@@ -123,6 +124,22 @@ window.addEventListener("click", (e) => {
             .classList.add("visually-hidden");
     }
 });
+
+function addedToCartPopup(target) {
+    if (target) {
+        const targetMainElement =
+            target.closest("[data-recommended-book-id]") ||
+            target.closest("[data-genre-book-id]");
+        const addedToCartPopup = targetMainElement.querySelector(
+            ".added-to-cart-popup"
+        );
+        addedToCartPopup.classList.add("fade");
+
+        setTimeout(() => {
+            addedToCartPopup.classList.remove("fade");
+        }, 600);
+    }
+}
 
 function updateCartBadgeQuantity() {
     const cartBadgeQuantity = document.getElementById("cart-quantity-badge");
