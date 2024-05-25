@@ -4,4 +4,4 @@ function setCurrentYear() {
     currentYearElemennt.textContent = new Date().getFullYear();
 }
 
-setCurrentYear;
+setCurrentYear();
