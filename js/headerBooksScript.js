@@ -19,9 +19,9 @@ const FANTASY_COLOURS = { primary: "#FCE5E3", secondary: "#cf352e" };
 const DETECTIVE_FICTION_COLOURS = { primary: "#EEEEEE", secondary: "#b7410e" };
 
 // IMAGES FOR DIFFERENT GENRES
-const SCIENCE_FICTION_IMAGE = "./images/hero-images/science-fiction.jpg";
-const FANTASY_IMAGE = "./images/hero-images/fantasy.jpg";
-const DETECTIVE_FICTION_IMAGE = "./images/hero-images/detective.jpg";
+const SCIENCE_FICTION_IMAGE = "./images/hero-images/science-fiction.webp";
+const FANTASY_IMAGE = "./images/hero-images/fantasy.webp";
+const DETECTIVE_FICTION_IMAGE = "./images/hero-images/detective.webp";
 
 // TEXT FOR DIFFERENT GENRES
 const SCIENCE_FICTION_TEXT = "Science Fiction";
