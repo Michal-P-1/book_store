@@ -6,9 +6,6 @@ import {
 import { setCurrency } from "../utils/setCurrency.js";
 
 const LOCAL_STORAGE_SUFFIX = "cart-items";
-// TODO:
-// 5. Currency function
-// 6. Bundler ?? maybaaa
 
 const shoppingCartButton = document.querySelector("#cart-button");
 const shoppingCartSummarySection = document.querySelector(
